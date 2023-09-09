@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "phonetic-segmentation-alignment"
+version = "0.1.0"
+description = ""
+authors = ["Christoph Baldow <christoph.baldow@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
