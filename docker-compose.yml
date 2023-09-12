@@ -3,16 +3,23 @@ services:
     container_name: phonetic_segmentation_alignment
     build: .
     command: bash -c "rm -fR rdy && poetry install && touch rdy && tail -F rdy"
+    environment:
+      - RAW_DATA_FOLDER=/home/app/data/raw
+      - SPLIT_DATA_FOLDER=/home/app/data/mfa_input
     volumes:
       - ./data:/home/app/data
       - ./phonetic_segmentation_alignment:/home/app/phonetic_segmentation_alignment
+      - ./split.sh:/home/app/split.sh
   mfa:
     container_name: mfa
     image: mmcauliffe/montreal-forced-aligner:latest
     command: bash -c "touch ~/rdy && tail -F ~/rdy"
+    environment:
+      - MFA_INPUT=/home/mfauser/data/mfa_input
+      - MFA_OUTPUT=/home/mfauser/data/mfa_output
     volumes:
-      - ./data:/data
-      - ./mfa.sh:/home/mfauser/mfa.sh
+      - ./data:/home/mfauser/data
+      - ./align.sh:/home/mfauser/align.sh
   # concat:
   #   container_name: concat
     

@@ -17,4 +17,4 @@ else
 fi
 
 # run alignment
-mfa align -s 4 --clean /data/mfa_input german_mfa german_mfa /data/mfa_ouput
+mfa align -s 4 --clean $MFA_INPUT german_mfa german_mfa $MFA_OUTPUT --beam 1000
