@@ -20,12 +20,29 @@ This repository provides tools and scripts for phonetic segmentation, alignment 
    git clone https://github.com/styx0r/phonetic_segmentation_alignment.git
    cd phonetic_segmentation_alignment
 
-2. **Build the Docker Image**
+2. **(Optional) Build the Docker Image**
    ```bash
    docker-compose build
 
 3. **Run the application**
    ```bash
-   docker-compose up -d
+   ./run.sh
+   ```
+   The docker environment is started and the pipeline (split, align and concatenate) is running. You can optionally run it as often as you wish, e.g. if you
+   provide different sets of input files. The docker environment is started just once and after the first run, the consecutive runs will take less time.
 
-**More is Coming soon ...**
+4. **Shutting down the application
+   ```bash
+   docker-compose down
+   ```
+   After finishing the analysis, you can run docker-compose down to shut down the docker containers.
+
+## Data Provision
+
+Raw data folder should be provided in the ENV var `RAW_DATA_FOLDER` in `docker-compose.yml`. It defaults to
+`data/raw`. The output folders can be defined also in the
+`docker-compose.yml`. For each raw wav file a corresponding
+TextGrid file should be provided with the same name.
+In the TextGrid file the words and corresponding intervals
+are defined in the `utterance` tier.
+
