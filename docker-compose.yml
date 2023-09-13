@@ -6,6 +6,9 @@ services:
     environment:
       - RAW_DATA_FOLDER=/home/app/data/raw
       - SPLIT_DATA_FOLDER=/home/app/data/mfa_input
+      - FOLDER_MFA_OUTPUT=/home/app/data/mfa_output
+      - FOLDER_SPLIT_WAV=/home/app/data/mfa_input
+      - FOLDER_FINAL=/home/app/data/final
     volumes:
       - ./data:/home/app/data
       - ./phonetic_segmentation_alignment:/home/app/phonetic_segmentation_alignment

@@ -21,3 +21,4 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.scripts]
 split_input_files = "phonetic_segmentation_alignment.split:split"
+concat_mfa_files = "phonetic_segmentation_alignment.concat:concat"
