@@ -15,6 +15,8 @@ def split():
             stem = Path(file_tgt).stem
             file_wav = os.path.join(RAW_DATA_FOLDER, stem + '.wav')
 
+            new_index = stem.split('_')[0]
+
             # skip if is not a valid wav file
             if not os.path.isfile(file_wav): continue
 
@@ -29,14 +31,16 @@ def split():
             for interval in tg.get_tier_by_name("utterance"):
 
                 # skip pause intervals denoted by xxx
-                if interval.text == 'xxx': continue 
+                if 'xxx' in interval.text: continue
+                
+                interval.text = interval.text.replace('/', '-').replace('__', '_')
 
                 # get word from text annotation in textgrid file
-                word = interval.text.split("_")[3]
+                word = interval.text.split("_")[-3]
 
                 # split wav and export to target folder
                 interval_wav = full_wav[int(interval.start_time * 1000):int(interval.end_time * 1000)]
-                interval_wav.export(f'''{SPLIT_DATA_FOLDER}/{interval.text}.wav''', format='wav')
+                interval_wav.export(f'''{SPLIT_DATA_FOLDER}/{new_index}_{interval.text}.wav''', format='wav')
 
                 # Create a TextGrid object with the duration of the WAV file
                 duration = interval.end_time - interval.start_time
@@ -49,4 +53,4 @@ def split():
                 # Add the tier to the TextGrid
                 tg.add_tier(tier)
                 # Save the TextGrid to file in target folder
-                tgt.io.write_to_file(tg, f'''{SPLIT_DATA_FOLDER}/{interval.text}.TextGrid''', format='long')
+                tgt.io.write_to_file(tg, f'''{SPLIT_DATA_FOLDER}/{new_index}_{interval.text}.TextGrid''', format='long')

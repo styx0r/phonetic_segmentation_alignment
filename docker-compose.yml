@@ -15,7 +15,7 @@ services:
       - ./split.sh:/home/app/split.sh
   mfa:
     container_name: mfa
-    image: mmcauliffe/montreal-forced-aligner:latest
+    image: mmcauliffe/montreal-forced-aligner:v2.2.17
     command: bash -c "touch ~/rdy && tail -F ~/rdy"
     environment:
       - MFA_INPUT=/home/mfauser/data/mfa_input

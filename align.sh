@@ -16,5 +16,9 @@ else
     mfa model download acoustic german_mfa
 fi
 
+if [ ! -d "$DIR" ]; then
+  mkdir $MFA_OUTPUT
+fi
+
 # run alignment
-mfa align -s 4 --clean $MFA_INPUT german_mfa german_mfa $MFA_OUTPUT #--beam 100 --retry_beam 400 --fine_tune
+mfa align -s 4 --clean $MFA_INPUT german_mfa german_mfa $MFA_OUTPUT --use_postgres --beam 100 --retry_beam 400 --fine_tune

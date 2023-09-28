@@ -23,13 +23,14 @@ def concat():
         # skip if is not a valid wav file
         if not os.path.isfile(file_tg) or not os.path.isfile(file_wav): continue
 
-        word = ((Path(file_tg).stem).split('_')[3])
+        word = ((Path(file_tg).stem).split('_')[-3])
         if textgrid_files.get(word) is None:
             textgrid_files[word] = []
         textgrid_files[word].append(file_tg)
 
     # next we go through all files and concatenate the wav files and TextGrid-Files
     for word, tg_files in textgrid_files.items():
+        # print(f'''concatenating: {word}''')
         concatenated_wav = AudioSegment.empty()
         concatenated_tg = tgt.TextGrid()
 
