@@ -18,12 +18,18 @@ def concat():
 
         stem = Path(file_mfa_output).stem
         file_tg = os.path.join(FOLDER_MFA_OUTPUT, stem + '.TextGrid')
-        file_wav = os.path.join(FOLDER_SPLIT_WAV, stem + '.wav')
 
-        # skip if is not a valid wav file
-        if not os.path.isfile(file_tg) or not os.path.isfile(file_wav): continue
+        if not os.path.isfile(file_tg):
+            continue
 
         word = ((Path(file_tg).stem).split('_')[-3])
+
+        # file_wav = os.path.join(FOLDER_SPLIT_WAV, word, stem + '.wav')
+        file_wav = os.path.join(FOLDER_SPLIT_WAV, stem + '.wav')
+        
+        # skip if is not a valid wav file
+        if not os.path.isfile(file_wav): continue
+
         if textgrid_files.get(word) is None:
             textgrid_files[word] = []
         textgrid_files[word].append(file_tg)
@@ -44,7 +50,7 @@ def concat():
             tier_origin.intervals[0] = Interval(tier_origin.start_time, tier_origin.end_time, Path(tg_file).stem)
             file_tg.add_tier(tier_origin)
 
-
+            # file_wav = os.path.join(FOLDER_SPLIT_WAV, word, Path(tg_file).stem + '.wav')
             file_wav = os.path.join(FOLDER_SPLIT_WAV, Path(tg_file).stem + '.wav')
 
             wav = AudioSegment.from_wav(file_wav)

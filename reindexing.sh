@@ -22,8 +22,8 @@ for file in "$dir"/*; do
 
     # Check if this base name has been processed before
     if ! grep -q "^$base_name$" "$temp_file"; then
-        # Ensure the ID has 4 digits by padding with zeros
-        padded_id=$(printf "%04d" $id)
+        # Ensure the ID has 3 digits by padding with zeros
+        padded_id=$(printf "%03d" $id)
 
         # Rename all files with this base name
         for matching_file in "$dir"/"$base_name".*; do
