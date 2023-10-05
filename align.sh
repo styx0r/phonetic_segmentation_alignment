@@ -23,7 +23,7 @@ if [ ! -d "$MFA_OUTPUT" ]; then
 fi
 
 # init and start database server
-mfa server init && mfa server start
+mfa server init && mfa server start 
 
 # # Loop through all subdirectories
 # for word_dir in "$MFA_INPUT"/*/ ; do
@@ -32,4 +32,7 @@ mfa server init && mfa server start
 #   mfa align -s 3 --clean $word_dir german_mfa german_mfa $MFA_OUTPUT --use_postgres --beam 100 --retry_beam 400 --fine_tune
 # done
 
-mfa align -s 3 --clean $MFA_INPUT german_mfa german_mfa $MFA_OUTPUT --use_postgres --beam 100 --retry_beam 400 --fine_tune
+# First time the postgres db takes some time to start, I do not want to dig deeper into the image, therefore this nasty sleep
+sleep 5
+
+mfa align -s 3 --clean $MFA_INPUT german_mfa german_mfa $MFA_OUTPUT --use_postgres --beam 1000 --retry_beam 4000 --fine_tune

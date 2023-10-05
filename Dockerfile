@@ -1,5 +1,5 @@
 # Use a base image with Python
-FROM python:3.11-slim
+FROM python:3.11.4-slim
 
 # Install system dependencies
 RUN apt-get update \

@@ -6,10 +6,12 @@ authors = ["Christoph Baldow <christoph.baldow@gmail.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = "3.11.4"
 tgt = "^1.4.4"
 pydub = "^0.25.1"
 numpy = "^1.25.2"
+matplotlib = "^3.8.0"
+pandas = "^2.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
